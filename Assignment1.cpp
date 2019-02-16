@@ -29,20 +29,21 @@ int main(int argc, char const *argv[]) {
   ofstream myfile;
   string dnaLine;
   int A, C, T, G, AA, AC, AT, CA, CC, CT, CG, TA, TC, TT, TG, GA, GC, GT, GG; // keep track of each bigram to calculate the probability
-  float probA, probC, probT, probG, probAA, probAC, probAT, probCA, probCC, probCT, probCG, probTA, probTC, probTT, probTG, probGA, probGC, probGT, probGG;
+  float probA, probC, probT, probG, probAA, probAC, probAT, probAG, probCA, probCC, probCT, probCG, probTA, probTC, probTT, probTG, probGA, probGC, probGT, probGG;
   float sum = 0, mean = 0, varience = 0, standardeviation = 0, variance = 0 ; // adds all the lengts of the different lines.
   int nlines = 0;
-
+  int total = 0;
+  int totBigram = 0;
 
   cout << "Insert the name of a file" << '\n';
   cin >> nameFileout;
+
 
   while (getline(nameFileout, dnaLine)){ // getline is a standar library that gets an a line as an imput and adds it to a string. NOTE:nameFileout is for the file.
     dna.length() += sum;  // adds to the sum the whole length of a line
     dna.length() += mean;
     nlines += 1;
-    int total = 0;
-    int totBigram = 0;
+
 
     //for loop that reitirates throughout the string to check if its the beggining of a bigram
     for (int a = 0; a < dnaLine.length() ; a++ ) {
@@ -168,13 +169,13 @@ int main(int argc, char const *argv[]) {
   probCA = CA / totBigram * 1.0;
   probCC = CC / totBigram * 1.0;
   probCT = CT / totBigram * 1.0;
-
   probCG = CG / totBigram * 1.0;
+
   probTA = TA / totBigram * 1.0;
   probTC = TC / totBigram * 1.0;
   probTT = TT / totBigram * 1.0;
-
   probTG = TG / totBigram * 1.0;
+  
   probGA = GA / totBigram * 1.0;
   probGC = GC / totBigram * 1.0;
   probGT = GT / totBigram * 1.0;
@@ -241,10 +242,10 @@ int main(int argc, char const *argv[]) {
         myfile << "C" ;
       }
       else if ( random < probG) {
-        myfile << "G" <<;
+        myfile << "G";
       }
       else if ( random < probT) {
-        myfile << "T" <<;
+        myfile << "T";
       }
     }
   }
