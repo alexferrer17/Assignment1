@@ -1,5 +1,7 @@
 #include <iostream>
 #include <fstream>
+#include <math.h>
+#include <cmath>
 using namespace std;
 
 double randNum()
@@ -34,17 +36,17 @@ int main(int argc, char const *argv[]) {
   cin >> nameFileout;
 
   while (getline(nameFileout, dnaLine)){ // getline is a standar library that gets an a line as an imput and adds it to a string. NOTE:nameFileout is for the file.
-    dna.length() =+ sum;  // adds to the sum the whole length of a line
-    dna.length() =+ mean;
+    dna.length() += sum;  // adds to the sum the whole length of a line
+    dna.length() += mean;
     nlines += 1;
     int total = 0;
     int totBigram = 0;
 
     //for loop that reitirates throughout the string to check if its the beggining of a bigram
     for (int a = 0; a < dnaLine.length() ; a++ ) {
-      numberOfChars += 1; //this adds a count to later on calculate each probability of bigrams.
+        //this adds a count to later on calculate each probability of bigrams.
       if( a == "A") {
-        A =+ dna[a];
+        A += dna[a];
         total++;
       }
 
@@ -68,86 +70,86 @@ int main(int argc, char const *argv[]) {
         AA += 1;
         totBigram++;     }
 
-      else if ( result && dna[a+1] == "AC") {
+      else if (  dna[a] && dna[a+1] == "AC") {
         AC += 1;
         totBigram++;
       }
 
 
-      else if ( result && dna[a+1] == "AT" ) {
+      else if (  dna[a] && dna[a+1] == "AT" ) {
         AT += 1;
         totBigram++;
       }
 
-      else if ( result && dna[a+1] == "AG" ) {
+      else if ( dna[a] && dna[a+1] == "AG" ) {
         AG += 1;
         totBigram++;
       }
 
-      else if ( result && dna[a+1] == "CA" ) {
+      else if ( dna[a] && dna[a+1] == "CA" ) {
         CA += 1;
         totBigram++;
       }
-      else if ( result && dna[a+1] == "CC") {
+      else if ( dna[a] && dna[a+1] == "CC") {
         CC += 1;
         totBigram++;
       }
 
-      else if ( result && dna[a+1] == "CT") {
+      else if ( dna[a] && dna[a+1] == "CT") {
         CT += 1;
         totBigram++;
       }
 
-      else  if ( result && dna[a+1] == "CG") {
+      else  if (  dna[a] && dna[a+1] == "CG") {
         CG += 1;
         totBigram++;
       }
 
-      else if ( result && dna[a+1] == "TA") {
+      else if ( dna[a] && dna[a+1] == "TA") {
         TA += 1;
         totBigram++;
       }
 
-      else if ( result && dna[a+1] == "TC") {
+      else if ( dna[a] && dna[a+1] == "TC") {
         TC += 1;
         totBigram++;
       }
 
-      else if ( result && dna[a+1] == "TT") {
+      else if ( dna[a] && dna[a+1] == "TT") {
         TT += 1;
         totBigram++;
       }
 
-      else if ( result + dna[a+1] == "TG") {
+      else if ( dna[a] + dna[a+1] == "TG") {
         totBigram++;
         TG += 1;
       }
 
-      else if ( result + dna[a+1] == "GA") {
+      else if ( dna[a] + dna[a+1] == "GA") {
         GA += 1;
         totBigram++;
       }
 
-      else if ( result + dna[a+1] == "GC") {
+      else if ( dna[a] + dna[a+1] == "GC") {
         GC += 1;
         totBigram++;
       }
 
-      else if ( result + dna[a+1] == "GT") {
+      else if ( dna[a] + dna[a+1] == "GT") {
         GT += 1;
         totBigram++;
       }
 
-      else if ( result + dna[a+1] == "GG") {
+      else if ( dna[a] + dna[a+1] == "GG") {
         GG += 1;
         totBigram++;
       }
 
     } // end of for loop
 
-    }
+    } // end of while loop
 
-  } // end of while loop
+
 
   //probability of each letter to appear as well as each bigram
 
@@ -177,7 +179,8 @@ int main(int argc, char const *argv[]) {
   probGG = GG / totBigram * 1.0;
   // Clear file and start from the beggining to find the
 
-  while (getline(nameFileout, dnaLine)) {
+  while (getline(nameFileout, dnaLine))
+  {
     variance = (dnaLine.length() - mean) * (dnaLine.lenth() - mean);
   }
 
