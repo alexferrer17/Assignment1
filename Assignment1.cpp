@@ -2,6 +2,7 @@
 #include <fstream>
 #include <math.h>
 #include <cmath>
+#include <cmath>
 using namespace std;
 
 double randNum()
@@ -23,9 +24,10 @@ double Generator(double mean, double standardeviation) {
 
   //reitirate through a string to find bigrams
 int main(int argc, char const *argv[]) {
+
+
   ofstream myfile;
   string dnaLine;
-  string dna, result;
   int A, C, T, G, AA, AC, AT, CA, CC, CT, CG, TA, TC, TT, TG, GA, GC, GT, GG; // keep track of each bigram to calculate the probability
   float probA, probC, probT, probG, probAA, probAC, probAT, probCA, probCC, probCT, probCG, probTA, probTC, probTT, probTG, probGA, probGC, probGT, probGG;
   float sum = 0, mean = 0, varience = 0, standardeviation = 0, variance = 0 ; // adds all the lengts of the different lines.
@@ -45,102 +47,102 @@ int main(int argc, char const *argv[]) {
     //for loop that reitirates throughout the string to check if its the beggining of a bigram
     for (int a = 0; a < dnaLine.length() ; a++ ) {
         //this adds a count to later on calculate each probability of bigrams.
-      if( a == "A") {
-        A += dna[a];
+      if( dnaLine[a] == "A") {
+        A += 1;
         total++;
       }
 
-      else if (a == "C") {
-        C += dna[a];
+      else if (dnaLine[a] == "C") {
+        C += 1;
         total++;
       }
 
-      else if (a == "T") {
-        T += dna[a];
+      else if (dnaLine[a] == "T") {
+        T += 1;
         total++;
       }
 
-      else if (a == "G") {
+      else if (dnaLine[a] == "G") {
         G += dna[a];
         total++;
       }
   /* This if statements are to find the different bigrams
   */
-       if ( dna[a] && dna[a+1] == "AA") {
+       if ( dnaLine[a] = "A" && dna[a+1] == "A") {
         AA += 1;
         totBigram++;     }
 
-      else if (  dna[a] && dna[a+1] == "AC") {
+      else if (  dnaLine[a] = "A" && dnaLine[a+1] == "C") {
         AC += 1;
         totBigram++;
       }
 
 
-      else if (  dna[a] && dna[a+1] == "AT" ) {
+      else if (  dnaLine[a] = "A" && dnaLine[a+1] == "T" ) {
         AT += 1;
         totBigram++;
       }
 
-      else if ( dna[a] && dna[a+1] == "AG" ) {
+      else if ( dnaLine[a] = "A" && dnaLine[a+1] == "G" ) {
         AG += 1;
         totBigram++;
       }
 
-      else if ( dna[a] && dna[a+1] == "CA" ) {
+      else if ( dnaLine[a] = "C" && dnaLine[a+1] == "A" ) {
         CA += 1;
         totBigram++;
       }
-      else if ( dna[a] && dna[a+1] == "CC") {
+      else if ( dnaLine[a] = "C" && dnaLine[a+1] == "C") {
         CC += 1;
         totBigram++;
       }
 
-      else if ( dna[a] && dna[a+1] == "CT") {
+      else if ( dnaLine[a] = "C" && dnaLine[a+1] == "T") {
         CT += 1;
         totBigram++;
       }
 
-      else  if (  dna[a] && dna[a+1] == "CG") {
+      else  if (  dnaLine[a] = "C" && dnaLine[a+1] == "G") {
         CG += 1;
         totBigram++;
       }
 
-      else if ( dna[a] && dna[a+1] == "TA") {
+      else if ( dnaLine[a] = "T" && dnaLine[a+1] == "A") {
         TA += 1;
         totBigram++;
       }
 
-      else if ( dna[a] && dna[a+1] == "TC") {
+      else if ( dnaLine[a] = "T" && dnaLine[a+1] == "C") {
         TC += 1;
         totBigram++;
       }
 
-      else if ( dna[a] && dna[a+1] == "TT") {
+      else if ( dnaLine[a] = "T" && dnaLine[a+1] == "T") {
         TT += 1;
         totBigram++;
       }
 
-      else if ( dna[a] + dna[a+1] == "TG") {
+      else if ( dnaLine[a]= "T" && dnaLine[a+1] == "G") {
         totBigram++;
         TG += 1;
       }
 
-      else if ( dna[a] + dna[a+1] == "GA") {
+      else if ( dnaLine[a]= "G" && dnaLine[a+1] == "A") {
         GA += 1;
         totBigram++;
       }
 
-      else if ( dna[a] + dna[a+1] == "GC") {
+      else if ( dnaLine[a] = "G" && dnaLine[a+1] == "C") {
         GC += 1;
         totBigram++;
       }
 
-      else if ( dna[a] + dna[a+1] == "GT") {
+      else if ( dnaLine[a] = "G" && dnaLine[a+1] == "T") {
         GT += 1;
         totBigram++;
       }
 
-      else if ( dna[a] + dna[a+1] == "GG") {
+      else if ( dnaLine[a] = "G" && dnaLine[a+1] == "G") {
         GG += 1;
         totBigram++;
       }
@@ -230,12 +232,13 @@ int main(int argc, char const *argv[]) {
     int temp = (int) value(mean, standardeviation);
     for ( int j = 0; j < temp; j++) {
 
-      double random = double randNum() / RAND_MAX;
-      std::cout << "A" <<;
+      double random = (double) randNum() / RAND_MAX;
+
       if ( random < probA) {
+        myfile << "A";
       }
       else if ( random < probC) {
-        myfile << "C" <<;
+        myfile << "C" ;
       }
       else if ( random < probG) {
         myfile << "G" <<;
