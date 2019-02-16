@@ -17,7 +17,7 @@ double GaussianDistribution () {
   return temp1 * temp2;
 }
 
-double Generator(double mean, double standardeviation) {
+double Value(double mean, double standardeviation) {
   return standardeviation * GaussianDistribution() + mean;
 }
 
@@ -28,122 +28,128 @@ int main(int argc, char const *argv[]) {
 
   ofstream myfile;
   string dnaLine;
-  int A, C, T, G, AA, AC, AT, CA, CC, CT, CG, TA, TC, TT, TG, GA, GC, GT, GG; // keep track of each bigram to calculate the probability
+  int A, C, T, G, AA, AC, AT, AG, CA, CC, CT, CG, TA, TC, TT, TG, GA, GC, GT, GG; // keep track of each bigram to calculate the probability
   float probA, probC, probT, probG, probAA, probAC, probAT, probAG, probCA, probCC, probCT, probCG, probTA, probTC, probTT, probTG, probGA, probGC, probGT, probGG;
   float sum = 0, mean = 0, varience = 0, standardeviation = 0, variance = 0 ; // adds all the lengts of the different lines.
   int nlines = 0;
   int total = 0;
   int totBigram = 0;
+  string nameFileout;
+
 
   cout << "Insert the name of a file" << '\n';
-  cin >> nameFileout;
 
+  if (argc > 1) {
+      nameFileout = argv[1];
+  }
 
-  while (getline(nameFileout, dnaLine)){ // getline is a standar library that gets an a line as an imput and adds it to a string. NOTE:nameFileout is for the file.
-    dna.length() += sum;  // adds to the sum the whole length of a line
-    dna.length() += mean;
+  fstream file (nameFileout);
+
+  while (getline(file, dnaLine)){ // getline is a standar library that gets an a line as an imput and adds it to a string. NOTE:nameFileout is for the file.
+    sum += dnaLine.length();  // adds to the sum the whole length of a line
+    mean += dnaLine.length();
     nlines += 1;
 
 
     //for loop that reitirates throughout the string to check if its the beggining of a bigram
     for (int a = 0; a < dnaLine.length() ; a++ ) {
         //this adds a count to later on calculate each probability of bigrams.
-      if( dnaLine[a] == "A") {
+      if( dnaLine[a] == 'A') {
         A += 1;
         total++;
       }
 
-      else if (dnaLine[a] == "C") {
+      else if (dnaLine[a] == 'C') {
         C += 1;
         total++;
       }
 
-      else if (dnaLine[a] == "T") {
+      else if (dnaLine[a] == 'T') {
         T += 1;
         total++;
       }
 
-      else if (dnaLine[a] == "G") {
-        G += dna[a];
+      else if (dnaLine[a] == 'G') {
+        G += dnaLine[a];
         total++;
       }
   /* This if statements are to find the different bigrams
   */
-       if ( dnaLine[a] = "A" && dna[a+1] == "A") {
+       if ( dnaLine[a] = 'A' && dnaLine[a+1] == 'A') {
         AA += 1;
         totBigram++;     }
 
-      else if (  dnaLine[a] = "A" && dnaLine[a+1] == "C") {
+      else if (  dnaLine[a] = 'A' && dnaLine[a+1] == 'C') {
         AC += 1;
         totBigram++;
       }
 
 
-      else if (  dnaLine[a] = "A" && dnaLine[a+1] == "T" ) {
+      else if (  dnaLine[a] = 'A' && dnaLine[a+1] == 'T' ) {
         AT += 1;
         totBigram++;
       }
 
-      else if ( dnaLine[a] = "A" && dnaLine[a+1] == "G" ) {
+      else if ( dnaLine[a] = 'A' && dnaLine[a+1] == 'G' ) {
         AG += 1;
         totBigram++;
       }
 
-      else if ( dnaLine[a] = "C" && dnaLine[a+1] == "A" ) {
+      else if ( dnaLine[a] = 'C' && dnaLine[a+1] == 'A' ) {
         CA += 1;
         totBigram++;
       }
-      else if ( dnaLine[a] = "C" && dnaLine[a+1] == "C") {
+      else if ( dnaLine[a] = 'C' && dnaLine[a+1] == 'C') {
         CC += 1;
         totBigram++;
       }
 
-      else if ( dnaLine[a] = "C" && dnaLine[a+1] == "T") {
+      else if ( dnaLine[a] = 'C' && dnaLine[a+1] == 'T') {
         CT += 1;
         totBigram++;
       }
 
-      else  if (  dnaLine[a] = "C" && dnaLine[a+1] == "G") {
+      else  if (  dnaLine[a] = 'C' && dnaLine[a+1] == 'G') {
         CG += 1;
         totBigram++;
       }
 
-      else if ( dnaLine[a] = "T" && dnaLine[a+1] == "A") {
+      else if ( dnaLine[a] = 'T' && dnaLine[a+1] == 'A') {
         TA += 1;
         totBigram++;
       }
 
-      else if ( dnaLine[a] = "T" && dnaLine[a+1] == "C") {
+      else if ( dnaLine[a] = 'T' && dnaLine[a+1] == 'C') {
         TC += 1;
         totBigram++;
       }
 
-      else if ( dnaLine[a] = "T" && dnaLine[a+1] == "T") {
+      else if ( dnaLine[a] = 'T' && dnaLine[a+1] == 'T') {
         TT += 1;
         totBigram++;
       }
 
-      else if ( dnaLine[a]= "T" && dnaLine[a+1] == "G") {
+      else if ( dnaLine[a]= 'T' && dnaLine[a+1] == 'G') {
         totBigram++;
         TG += 1;
       }
 
-      else if ( dnaLine[a]= "G" && dnaLine[a+1] == "A") {
+      else if ( dnaLine[a]= 'G' && dnaLine[a+1] == 'A') {
         GA += 1;
         totBigram++;
       }
 
-      else if ( dnaLine[a] = "G" && dnaLine[a+1] == "C") {
+      else if ( dnaLine[a] = 'G' && dnaLine[a+1] == 'C') {
         GC += 1;
         totBigram++;
       }
 
-      else if ( dnaLine[a] = "G" && dnaLine[a+1] == "T") {
+      else if ( dnaLine[a] = 'G' && dnaLine[a+1] == 'T') {
         GT += 1;
         totBigram++;
       }
 
-      else if ( dnaLine[a] = "G" && dnaLine[a+1] == "G") {
+      else if ( dnaLine[a] = 'G' && dnaLine[a+1] == 'G') {
         GG += 1;
         totBigram++;
       }
@@ -175,16 +181,17 @@ int main(int argc, char const *argv[]) {
   probTC = TC / totBigram * 1.0;
   probTT = TT / totBigram * 1.0;
   probTG = TG / totBigram * 1.0;
-  
+
   probGA = GA / totBigram * 1.0;
   probGC = GC / totBigram * 1.0;
   probGT = GT / totBigram * 1.0;
   probGG = GG / totBigram * 1.0;
   // Clear file and start from the beggining to find the
-
-  while (getline(nameFileout, dnaLine))
+  file.clear();
+  file.seekg(0, file.beg);
+  while (getline(file, dnaLine))
   {
-    variance = (dnaLine.length() - mean) * (dnaLine.lenth() - mean);
+    variance = (dnaLine.length() - mean) * (dnaLine.length() - mean);
   }
 
   mean = mean / nlines;
@@ -230,7 +237,7 @@ int main(int argc, char const *argv[]) {
 
 //for loop that prints the DNA strings.
   for ( int i = 0; i < 1000; i++ ) {
-    int temp = (int) value(mean, standardeviation);
+    int temp = (int) Value(mean, standardeviation);
     for ( int j = 0; j < temp; j++) {
 
       double random = (double) randNum() / RAND_MAX;
@@ -250,5 +257,8 @@ int main(int argc, char const *argv[]) {
     }
   }
 
+  myfile.close();
+
   return 0;
+
 } // end of main()
